@@ -9,18 +9,26 @@ import java.util.List;
 public class TaskController {
     private final TaskService taskService;
 
-    public TaskController(TaskService todoService) {
-        this.taskService = todoService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping
-    public List<Task> getAllTasks() {
-        return this.taskService.getAllTasks();
+    public List<Task> getTasks() {
+        return this.taskService.getTasks();
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task) {
+    public Task postTask(@RequestBody Task task) {
         System.out.println(task);
-        return taskService.createTask(task);
+        return taskService.postTask(task);
+    }
+
+    @PutMapping("/{id}")
+    public Task putTask(@PathVariable String id, @RequestBody Task task) {
+        if (!id.equals(task.id())) {
+            throw new IllegalArgumentException("id does not match");
+        }
+        return taskService.putTask(task);
     }
 }

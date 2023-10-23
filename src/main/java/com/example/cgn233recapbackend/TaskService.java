@@ -1,9 +1,11 @@
 package com.example.cgn233recapbackend;
 
-
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TaskService {
@@ -13,16 +15,20 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllTasks() {
+    public List<Task> getTasks() {
         return taskRepository.findAll();
     }
 
-    public Task createTask(Task task) {
+    public Task postTask(Task task) {
         Task createdTask = new Task(
-                task.id(),
+                UUID.randomUUID().toString(),
                 task.description(),
-                task.status()
+                TaskStatus.OPEN
         );
         return taskRepository.save(createdTask);
+    }
+
+    public Task putTask(Task task) {
+        return taskRepository.save(task);
     }
 }
