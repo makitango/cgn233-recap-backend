@@ -17,6 +17,10 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    public Task getTask(String id) {
+        return taskRepository.findById(id).orElseThrow();
+    }
+
     public Task postTask(Task task) {
         Task createdTask = new Task(
                 UUID.randomUUID().toString(),
@@ -26,12 +30,11 @@ public class TaskService {
         return taskRepository.save(createdTask);
     }
 
-    public Task putTask(Task task) {
+    public Task moveTask(Task task) {
         return taskRepository.save(task);
     }
 
     public void deleteTask(String id) {
         taskRepository.deleteById(id);
     }
-
 }
