@@ -1,8 +1,6 @@
 package com.example.cgn233recapbackend;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,4 +33,5 @@ public class TaskService {
     public void deleteTask(String id) {
         taskRepository.deleteById(id);
     }
+
 }

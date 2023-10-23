@@ -25,10 +25,8 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Task putTask(@PathVariable String id, @RequestBody Task task) {
-        if (!id.equals(task.id())) {
-            throw new IllegalArgumentException("id does not match");
-        }
+    public Task putTask(@RequestBody Task task) {
+        System.out.println(task);
         return taskService.putTask(task);
     }
 
